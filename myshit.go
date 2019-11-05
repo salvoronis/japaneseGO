@@ -27,7 +27,6 @@ func main(){
   sort.Slice(kanjj, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
     ra := rand.Intn(100)
-    fmt.Println(ra)
     if ra <= 49{
       return true
     } else {
@@ -67,9 +66,18 @@ func main(){
 
   entryBut.Connect("clicked", func(){
     schet++
-    fmt.Println("clicker")
-    label1.SetText(kanjj[schet].Imi)
-    label2.SetText(kanjj[schet].Yomi)
+    if (schet >= len(kanjj)){
+      var itog string
+      for _, elem := range kanjj {
+        itog += elem.Kanji
+        fmt.Println(itog)
+      }
+      label1.SetText(itog)
+      label2.SetText("You was good\nAnd did good")
+    } else {
+      label1.SetText(kanjj[schet].Imi)
+      label2.SetText(kanjj[schet].Yomi)
+    }
   })
 
   win := obj.(*gtk.Window)

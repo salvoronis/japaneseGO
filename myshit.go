@@ -6,9 +6,6 @@
    "fmt"
    "os"
    "encoding/json"
-   "math/rand"
-   "sort"
-   "time"
  )
 
 type word struct{
@@ -20,21 +17,14 @@ type words struct{
   Fuck []word
 }
 
+var kotoba []word
+
+var schet int = 0
+
+var conv1 *gtk.Label = nil
+var conv2 *gtk.Label = nil
 
 func main(){
-  kanjj := japanese("n4.json")
-  //fmt.Println(kanjj[1].Imi)
-  sort.Slice(kanjj, func(i, j int)bool{
-    rand.Seed(time.Now().UnixNano())
-    ra := rand.Intn(100)
-    if ra <= 49{
-      return true
-    } else {
-      return false
-    }
-  })
-
-
   gtk.Init(nil)
   b, err := gtk.BuilderNew()
   if err != nil {
@@ -44,6 +34,8 @@ func main(){
   if err != nil {
     log.Fatal("Ошибка", err)
   }
+
+  b.ConnectSignals(signals)
 
   obj, err := b.GetObject("window_main")
   if err != nil {
@@ -55,29 +47,30 @@ func main(){
 
   lab1, _ := b.GetObject("label1")
   label1 := lab1.(*gtk.Label)
+  conv1 = label1
 
   lab2, _ := b.GetObject("label2")
   label2 := lab2.(*gtk.Label)
+  conv2 = label2
 
-  var schet int = 0
 
-  label1.SetText(kanjj[0].Imi)
-  label2.SetText(kanjj[0].Yomi)
+  label1.SetText("Imi")
+  label2.SetText("Yomi")
 
   entryBut.Connect("clicked", func(){
-    schet++
-    if (schet >= len(kanjj)){
+    if (schet >= len(kotoba)){
       var itog string
-      for _, elem := range kanjj {
+      for _, elem := range kotoba {
         itog += elem.Kanji
         fmt.Println(itog)
       }
       label1.SetText(itog)
       label2.SetText("You was good\nAnd did good")
     } else {
-      label1.SetText(kanjj[schet].Imi)
-      label2.SetText(kanjj[schet].Yomi)
+      label1.SetText(kotoba[schet].Imi)
+      label2.SetText(kotoba[schet].Yomi)
     }
+    schet++
   })
 
   win := obj.(*gtk.Window)

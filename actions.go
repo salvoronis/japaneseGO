@@ -23,7 +23,7 @@ func damn()  {
 func govno4(){
   schet = 0
   conv1.SetText("start level 4")
-  conv2.SetText("im tired")
+  conv2.SetText("")
   kotoba = japanese("n4.json")
   sort.Slice(kotoba, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
@@ -38,7 +38,7 @@ func govno4(){
 func govno3(){
   schet = 0
   conv1.SetText("start level 3")
-  conv2.SetText("im tired")
+  conv2.SetText("")
   kotoba = japanese("n3.json")
   sort.Slice(kotoba, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
@@ -53,7 +53,7 @@ func govno3(){
 func govno2(){
   schet = 0
   conv1.SetText("start level 2")
-  conv2.SetText("im tired")
+  conv2.SetText("")
   kotoba = japanese("n2.json")
   sort.Slice(kotoba, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
@@ -68,7 +68,7 @@ func govno2(){
 func govno5(){
   schet = 0
   conv1.SetText("start level 5")
-  conv2.SetText("im tired")
+  conv2.SetText("")
   kotoba = japanese("n5.json")
   sort.Slice(kotoba, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())

@@ -68,7 +68,7 @@ func main(){
         }
       }
       label1.SetText(itog)
-      label2.SetText("You was good\nAnd did good")
+      label2.SetText("")
     } else {
       label1.SetText(kotoba[schet].Imi)
       label2.SetText(kotoba[schet].Yomi)

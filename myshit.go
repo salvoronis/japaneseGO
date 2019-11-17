@@ -60,9 +60,12 @@ func main(){
   entryBut.Connect("clicked", func(){
     if (schet >= len(kotoba)){
       var itog string
-      for _, elem := range kotoba {
+      for index, elem := range kotoba {
         itog += elem.Kanji
         fmt.Println(itog)
+        if (index+1) % 30 == 0 {
+          itog += "\n"
+        }
       }
       label1.SetText(itog)
       label2.SetText("You was good\nAnd did good")

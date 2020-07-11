@@ -62,7 +62,7 @@ func main(){
       var itog string
       for index, elem := range kotoba {
         itog += elem.Kanji
-        fmt.Println(itog)
+        fmt.Print(elem.Kanji)
         if (index+1) % 30 == 0 {
           itog += "\n"
         }

@@ -4,8 +4,8 @@ APPNAME=kanjitest
 
 all: build
 
-run: actions.go myshit.go
-	go run actions.go myshit.go
+run: actions.go main.go
+	go run actions.go main.go
 
 build: dep
 	go build -o $(DESTDIR)/$(APPNAME) .

@@ -1,4 +1,3 @@
-//This is the package comment
 package main
 
 import (
@@ -9,13 +8,11 @@ import (
   "encoding/json"
 )
 
-//The word object steuct
 type word struct{
-  Imi string
-  Yomi string
-  Kanji string
+  Imi string `json:"meaning"`
+  Yomi string `json:"reading"`
+  Kanji string `json:"kanji"`
 }
-//This struct contains all words from chosen level
 type words struct{
   List []word
 }

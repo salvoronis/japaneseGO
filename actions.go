@@ -8,20 +8,20 @@ import (
 )
 
 var signals = map[string]interface{}{
-  "govno": govno5,
-	"n4standart": govno4,
-  "n3standart": govno3,
-  "n2standart": govno2,
-  "damnit": damn,
+  "govno": standart5,
+	"n4standart": standart4,
+  "n3standart": standart3,
+  "n2standart": standart2,
+  "damnit": exit,
 }
 
 
-func damn()  {
+func exit()  {
   gtk.MainQuit()
 }
 
-func govno4(){
-  schet = 0
+func standart4(){
+  count = 0
   conv1.SetText("start level 4")
   conv2.SetText("")
   kotoba = japanese("/home/salvoroni/myshit/n4.json")
@@ -35,8 +35,8 @@ func govno4(){
     }
   })
 }
-func govno3(){
-  schet = 0
+func standart3(){
+  count = 0
   conv1.SetText("start level 3")
   conv2.SetText("")
   kotoba = japanese("/home/salvoroni/myshit/n3.json")
@@ -50,8 +50,8 @@ func govno3(){
     }
   })
 }
-func govno2(){
-  schet = 0
+func standart2(){
+  count = 0
   conv1.SetText("start level 2")
   conv2.SetText("")
   kotoba = japanese("/home/salvoroni/myshit/n2.json")
@@ -65,8 +65,8 @@ func govno2(){
     }
   })
 }
-func govno5(){
-  schet = 0
+func standart5(){
+  count = 0
   conv1.SetText("start level 5")
   conv2.SetText("")
   kotoba = japanese("/home/salvoroni/myshit/n5.json")

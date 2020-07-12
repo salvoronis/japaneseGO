@@ -1,25 +1,28 @@
- package main
+//This is the package comment
+package main
 
- import (
-   "log"
-   "github.com/gotk3/gotk3/gtk"
-   "fmt"
-   "os"
-   "encoding/json"
- )
+import (
+  "log"
+  "github.com/gotk3/gotk3/gtk"
+  "fmt"
+  "os"
+  "encoding/json"
+)
 
+//The word object steuct
 type word struct{
   Imi string
   Yomi string
   Kanji string
 }
+//This struct contains all words from chosen level
 type words struct{
   List []word
 }
 
 var kotoba []word
 
-var schet int = 0
+var count int = 0
 
 var conv1 *gtk.Label = nil
 var conv2 *gtk.Label = nil
@@ -58,7 +61,7 @@ func main(){
   label2.SetText("Yomi")
 
   entryBut.Connect("clicked", func(){
-    if (schet >= len(kotoba)){
+    if (count >= len(kotoba)){
       var itog string
       for index, elem := range kotoba {
         itog += elem.Kanji
@@ -70,10 +73,10 @@ func main(){
       label1.SetText(itog)
       label2.SetText("")
     } else {
-      label1.SetText(kotoba[schet].Imi)
-      label2.SetText(kotoba[schet].Yomi)
+      label1.SetText(kotoba[count].Imi)
+      label2.SetText(kotoba[count].Yomi)
     }
-    schet++
+    count++
   })
 
   win := obj.(*gtk.Window)
@@ -84,13 +87,18 @@ func main(){
   gtk.Main()
 }
 
+//japanese function will read the "path" file
+//Decode json and return array of words
 func japanese(path string)(elements []word){
-  file, _ := os.Open(path)
+  file, err := os.Open(path)
+  if err != nil {
+    log.Printf("Can not open %s\n",path)
+  }
   defer file.Close()
 
   decoder := json.NewDecoder(file)
   conf := words{}
-  err := decoder.Decode(&conf)
+  err = decoder.Decode(&conf)
   if err != nil {
     fmt.Println(err)
   }

@@ -14,7 +14,7 @@ type word struct{
   Kanji string
 }
 type words struct{
-  Fuck []word
+  List []word
 }
 
 var kotoba []word
@@ -94,5 +94,5 @@ func japanese(path string)(elements []word){
   if err != nil {
     fmt.Println(err)
   }
-  return conf.Fuck
+  return conf.List
 }

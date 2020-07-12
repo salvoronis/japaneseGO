@@ -22,10 +22,10 @@ func exit()  {
 
 func standart4(){
   count = 0
-  conv1.SetText("start level 4")
-  conv2.SetText("")
-  kotoba = japanese("/home/salvoroni/myshit/n4.json")
-  sort.Slice(kotoba, func(i, j int)bool{
+  labelMean.SetText("start level 4")
+  labelRead.SetText("")
+  kanjiArr = japanese("/home/salvoroni/myshit/n4.json")
+  sort.Slice(kanjiArr, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
     ra := rand.Intn(100)
     if ra <= 49{
@@ -37,10 +37,10 @@ func standart4(){
 }
 func standart3(){
   count = 0
-  conv1.SetText("start level 3")
-  conv2.SetText("")
-  kotoba = japanese("/home/salvoroni/myshit/n3.json")
-  sort.Slice(kotoba, func(i, j int)bool{
+  labelMean.SetText("start level 3")
+  labelRead.SetText("")
+  kanjiArr = japanese("/home/salvoroni/myshit/n3.json")
+  sort.Slice(kanjiArr, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
     ra := rand.Intn(100)
     if ra <= 49{
@@ -52,10 +52,10 @@ func standart3(){
 }
 func standart2(){
   count = 0
-  conv1.SetText("start level 2")
-  conv2.SetText("")
-  kotoba = japanese("/home/salvoroni/myshit/n2.json")
-  sort.Slice(kotoba, func(i, j int)bool{
+  labelMean.SetText("start level 2")
+  labelRead.SetText("")
+  kanjiArr = japanese("/home/salvoroni/myshit/n2.json")
+  sort.Slice(kanjiArr, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
     ra := rand.Intn(100)
     if ra <= 49{
@@ -67,10 +67,10 @@ func standart2(){
 }
 func standart5(){
   count = 0
-  conv1.SetText("start level 5")
-  conv2.SetText("")
-  kotoba = japanese("/home/salvoroni/myshit/n5.json")
-  sort.Slice(kotoba, func(i, j int)bool{
+  labelMean.SetText("start level 5")
+  labelRead.SetText("")
+  kanjiArr = japanese("/home/salvoroni/myshit/n5.json")
+  sort.Slice(kanjiArr, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
     ra := rand.Intn(100)
     if ra <= 49{

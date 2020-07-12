@@ -9,20 +9,17 @@ import (
 )
 
 type word struct{
-  Imi string `json:"meaning"`
-  Yomi string `json:"reading"`
+  Mean string `json:"meaning"`
+  Read string `json:"reading"`
   Kanji string `json:"kanji"`
 }
-type words struct{
-  List []word
-}
 
-var kotoba []word
+var kanjiArr []word
 
 var count int = 0
 
-var conv1 *gtk.Label = nil
-var conv2 *gtk.Label = nil
+var labelMean *gtk.Label = nil
+var labelRead *gtk.Label = nil
 
 func main(){
   gtk.Init(nil)
@@ -46,32 +43,29 @@ func main(){
   entryBut := but.(*gtk.Button)
 
   lab1, _ := b.GetObject("label1")
-  label1 := lab1.(*gtk.Label)
-  conv1 = label1
+  labelMean = lab1.(*gtk.Label)
 
   lab2, _ := b.GetObject("label2")
-  label2 := lab2.(*gtk.Label)
-  conv2 = label2
+  labelRead = lab2.(*gtk.Label)
 
-
-  label1.SetText("Imi")
-  label2.SetText("Yomi")
+  labelMean.SetText("Imi")
+  labelRead.SetText("Yomi")
 
   entryBut.Connect("clicked", func(){
-    if (count >= len(kotoba)){
+    if (count >= len(kanjiArr)){
       var itog string
-      for index, elem := range kotoba {
+      for index, elem := range kanjiArr {
         itog += elem.Kanji
         fmt.Print(elem.Kanji)
         if (index+1) % 30 == 0 {
           itog += "\n"
         }
       }
-      label1.SetText(itog)
-      label2.SetText("")
+      labelMean.SetText(itog)
+      labelRead.SetText("")
     } else {
-      label1.SetText(kotoba[count].Imi)
-      label2.SetText(kotoba[count].Yomi)
+      labelMean.SetText(kanjiArr[count].Mean)
+      labelRead.SetText(kanjiArr[count].Read)
     }
     count++
   })
@@ -94,10 +88,10 @@ func japanese(path string)(elements []word){
   defer file.Close()
 
   decoder := json.NewDecoder(file)
-  conf := words{}
+  conf := []word{}
   err = decoder.Decode(&conf)
   if err != nil {
     fmt.Println(err)
   }
-  return conf.List
+  return conf
 }

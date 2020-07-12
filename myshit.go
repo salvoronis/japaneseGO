@@ -30,7 +30,7 @@ func main(){
   if err != nil {
     log.Fatal("Ошибка", err)
   }
-  err = b.AddFromFile("myshit.glade")
+  err = b.AddFromFile("/home/salvoroni/myshit/myshit.glade")
   if err != nil {
     log.Fatal("Ошибка", err)
   }

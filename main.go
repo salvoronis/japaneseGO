@@ -14,12 +14,13 @@ type word struct{
   Kanji string `json:"kanji"`
 }
 
-var kanjiArr []word
+var (
+  kanjiArr []word
+  count int = 0
+  labelMean *gtk.Label
+  labelRead *gtk.Label
+)
 
-var count int = 0
-
-var labelMean *gtk.Label = nil
-var labelRead *gtk.Label = nil
 
 func main(){
   gtk.Init(nil)
@@ -39,13 +40,22 @@ func main(){
     log.Fatal("Ошибка", err)
   }
 
-  but, _ := b.GetObject("button1")
+  but, err := b.GetObject("button1")
+  if err != nil {
+    log.Fatal("Can not get button", err)
+  }
   entryBut := but.(*gtk.Button)
 
-  lab1, _ := b.GetObject("label1")
+  lab1, err := b.GetObject("label1")
+  if err != nil {
+    log.Fatal("Can not get label first", err)
+  }
   labelMean = lab1.(*gtk.Label)
 
-  lab2, _ := b.GetObject("label2")
+  lab2, err := b.GetObject("label2")
+  if err != nil {
+    log.Fatal("Can not get label second", err)
+  }
   labelRead = lab2.(*gtk.Label)
 
   labelMean.SetText("Imi")

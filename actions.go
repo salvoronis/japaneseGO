@@ -21,16 +21,16 @@ func exit()  {
 }
 
 func standart4(){
-  standart(currentDir+"/n4.json", "n4")
+  standart(currentDir+"/standart/n4.json", "n4")
 }
 func standart3(){
-  standart(currentDir+"/n3.json", "n3")
+  standart(currentDir+"/standart/n3.json", "n3")
 }
 func standart2(){
-  standart(currentDir+"/n2.json", "n2")
+  standart(currentDir+"/standart/n2.json", "n2")
 }
 func standart5(){
-  standart(currentDir+"/n5.json", "n5")
+  standart(currentDir+"/standart/n5.json", "n5")
 }
 
 func standart(filepath, label string){

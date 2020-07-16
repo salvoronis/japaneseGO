@@ -26,19 +26,29 @@ var (
 
 
 func main(){
-  logfile, _ := os.Create("./log.txt")
-  logger = log.New(logfile, "japaneseGo ", log.LstdFlags|log.Lshortfile)
   currentDir, _ = os.Getwd()
+  logfile, _ := os.Create(currentDir + "/log.txt")
+  logger = log.New(logfile, "japaneseGo ", log.LstdFlags|log.Lshortfile)
 
   gtk.Init(nil)
   application, err := gtk.BuilderNew()
   if err != nil {
     logger.Fatal("Innitial gtk error", err)
   }
-  err = application.AddFromFile("/home/salvoroni/myshit/myshit.glade")
+  err = application.AddFromFile(currentDir+"/glade/myshit.glade")
   if err != nil {
     logger.Fatal("Glade file error", err)
   }
+
+  /*window, err := gtk.WindowNew(gtk.WINDOW_TOPLEVEL)
+  if err != nil {
+      log.Fatal("Unable to create window:", err)
+  }
+  window.SetDefaultSize(800, 600)
+  window.Connect("destroy", func() {
+      gtk.MainQuit()
+  })
+  window.ShowAll()*/
 
   addOwnKanji(application)
 

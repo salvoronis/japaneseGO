@@ -90,7 +90,6 @@
                             <property name="can_focus">False</property>
                             <child>
                               <object class="GtkImageMenuItem" id="rep">
-                                <property name="label" translatable="yes">rep</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="use_stock">False</property>

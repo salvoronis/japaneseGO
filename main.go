@@ -6,6 +6,7 @@ import (
   "fmt"
   "os"
   "encoding/json"
+  "io/ioutil"
 )
 
 type word struct{
@@ -19,42 +20,50 @@ var (
   count int = 0
   labelMean *gtk.Label
   labelRead *gtk.Label
+  logger *log.Logger
+  currentDir string
 )
 
 
 func main(){
+  logfile, _ := os.Create("./log.txt")
+  logger = log.New(logfile, "japaneseGo ", log.LstdFlags|log.Lshortfile)
+  currentDir, _ = os.Getwd()
+
   gtk.Init(nil)
-  b, err := gtk.BuilderNew()
+  application, err := gtk.BuilderNew()
   if err != nil {
-    log.Fatal("Ошибка", err)
+    logger.Fatal("Innitial gtk error", err)
   }
-  err = b.AddFromFile("/home/salvoroni/myshit/myshit.glade")
+  err = application.AddFromFile("/home/salvoroni/myshit/myshit.glade")
   if err != nil {
-    log.Fatal("Ошибка", err)
-  }
-
-  b.ConnectSignals(signals)
-
-  obj, err := b.GetObject("window_main")
-  if err != nil {
-    log.Fatal("Ошибка", err)
+    logger.Fatal("Glade file error", err)
   }
 
-  but, err := b.GetObject("button1")
+  addOwnKanji(application)
+
+  application.ConnectSignals(signals)
+
+  obj, err := application.GetObject("window_main")
   if err != nil {
-    log.Fatal("Can not get button", err)
+    logger.Fatal("Can not get main window", err)
+  }
+
+  but, err := application.GetObject("button1")
+  if err != nil {
+    logger.Fatal("Can not get button", err)
   }
   entryBut := but.(*gtk.Button)
 
-  lab1, err := b.GetObject("label1")
+  lab1, err := application.GetObject("label1")
   if err != nil {
-    log.Fatal("Can not get label first", err)
+    logger.Fatal("Can not get label first", err)
   }
   labelMean = lab1.(*gtk.Label)
 
-  lab2, err := b.GetObject("label2")
+  lab2, err := application.GetObject("label2")
   if err != nil {
-    log.Fatal("Can not get label second", err)
+    logger.Fatal("Can not get label second", err)
   }
   labelRead = lab2.(*gtk.Label)
 
@@ -93,7 +102,7 @@ func main(){
 func japanese(path string)(elements []word){
   file, err := os.Open(path)
   if err != nil {
-    log.Printf("Can not open %s\n",path)
+    logger.Printf("Can not open %s\n",path)
   }
   defer file.Close()
 
@@ -104,4 +113,24 @@ func japanese(path string)(elements []word){
     fmt.Println(err)
   }
   return conf
+}
+
+func addOwnKanji(application *gtk.Builder){
+  ownKanjiBar, _ := application.GetObject("subownlib")
+  ownKanji := ownKanjiBar.(*gtk.Menu)
+  files, err := ioutil.ReadDir("./user")
+  if err != nil {
+    logger.Println("Can not get files from user data")
+  }
+  for _, file := range files {
+    var filename string = file.Name()
+    item, err := gtk.MenuItemNewWithLabel(file.Name())
+    if err != nil {
+      logger.Println("Can not get file")
+    }
+    item.Connect("activate", func(){
+      standart(currentDir+"/user/"+filename, filename[:len(filename)-5])
+    })
+    ownKanji.Append(item)
+  }
 }

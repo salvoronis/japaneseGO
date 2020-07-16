@@ -8,11 +8,11 @@ import (
 )
 
 var signals = map[string]interface{}{
-  "govno": standart5,
+  "n5standart": standart5,
 	"n4standart": standart4,
   "n3standart": standart3,
   "n2standart": standart2,
-  "damnit": exit,
+  "exit": exit,
 }
 
 
@@ -21,55 +21,23 @@ func exit()  {
 }
 
 func standart4(){
-  count = 0
-  labelMean.SetText("start level 4")
-  labelRead.SetText("")
-  kanjiArr = japanese("/home/salvoroni/myshit/n4.json")
-  sort.Slice(kanjiArr, func(i, j int)bool{
-    rand.Seed(time.Now().UnixNano())
-    ra := rand.Intn(100)
-    if ra <= 49{
-      return true
-    } else {
-      return false
-    }
-  })
+  standart(currentDir+"/n4.json", "n4")
 }
 func standart3(){
-  count = 0
-  labelMean.SetText("start level 3")
-  labelRead.SetText("")
-  kanjiArr = japanese("/home/salvoroni/myshit/n3.json")
-  sort.Slice(kanjiArr, func(i, j int)bool{
-    rand.Seed(time.Now().UnixNano())
-    ra := rand.Intn(100)
-    if ra <= 49{
-      return true
-    } else {
-      return false
-    }
-  })
+  standart(currentDir+"/n3.json", "n3")
 }
 func standart2(){
-  count = 0
-  labelMean.SetText("start level 2")
-  labelRead.SetText("")
-  kanjiArr = japanese("/home/salvoroni/myshit/n2.json")
-  sort.Slice(kanjiArr, func(i, j int)bool{
-    rand.Seed(time.Now().UnixNano())
-    ra := rand.Intn(100)
-    if ra <= 49{
-      return true
-    } else {
-      return false
-    }
-  })
+  standart(currentDir+"/n2.json", "n2")
 }
 func standart5(){
+  standart(currentDir+"/n5.json", "n5")
+}
+
+func standart(filepath, label string){
   count = 0
-  labelMean.SetText("start level 5")
+  labelMean.SetText("start "+label)
   labelRead.SetText("")
-  kanjiArr = japanese("/home/salvoroni/myshit/n5.json")
+  kanjiArr = japanese(filepath)
   sort.Slice(kanjiArr, func(i, j int)bool{
     rand.Seed(time.Now().UnixNano())
     ra := rand.Intn(100)

@@ -66,18 +66,11 @@ func editstandartmenu() {
   if err != nil {
     logger.Fatal("Glade file error ", err)
   }
-
-
-
   box, err := editwindow.GetObject("combo_box")
   if err != nil {
     logger.Fatal("Can not get lvl select box ", err)
   }
   target = box.(*gtk.ComboBoxText)
-  //logger.Println(target.GetActiveText())
-
-
-
   editwindow.ConnectSignals(signalsedit)
   obj, err := editwindow.GetObject("lvleditor")
   if err != nil {

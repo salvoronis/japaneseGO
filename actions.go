@@ -13,6 +13,11 @@ var signals = map[string]interface{}{
   "n3standart": standart3,
   "n2standart": standart2,
   "exit": exit,
+  "edstandart": editstandartmenu,
+}
+
+var signalsedit = map[string]interface{}{
+  "lvlchanger": setlevel,
 }
 
 
@@ -47,4 +52,41 @@ func standart(filepath, label string){
       return false
     }
   })
+}
+
+var editwindow *gtk.Builder
+var target *gtk.ComboBoxText
+
+func editstandartmenu() {
+  editwindow, err := gtk.BuilderNew()
+  if err != nil {
+    logger.Fatal("Innitial gtk error ", err)
+  }
+  err = editwindow.AddFromFile(currentDir+"/glade/lvleditor.glade")
+  if err != nil {
+    logger.Fatal("Glade file error ", err)
+  }
+
+
+
+  box, err := editwindow.GetObject("combo_box")
+  if err != nil {
+    logger.Fatal("Can not get lvl select box ", err)
+  }
+  target = box.(*gtk.ComboBoxText)
+  //logger.Println(target.GetActiveText())
+
+
+
+  editwindow.ConnectSignals(signalsedit)
+  obj, err := editwindow.GetObject("lvleditor")
+  if err != nil {
+    logger.Fatal("Can not get main window ", err)
+  }
+  win := obj.(*gtk.Window)
+  win.ShowAll()
+}
+
+func setlevel() {
+  logger.Println(target.GetActiveText())
 }
